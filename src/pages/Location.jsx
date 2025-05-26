@@ -4,10 +4,20 @@ import { useRef } from 'react';
 import 'leaflet/dist/leaflet.css';
 import './Location.css';
 
-// 호텔 마커 아이콘
+// 호텔 빨간 마커 아이콘
 const hotelIcon = new L.Icon({
-  iconUrl: '/marker-icon-red.png',
-  shadowUrl: 'https://unpkg.com/leaflet@1.9.3/dist/images/marker-shadow.png',
+  iconUrl: '/marker-icon-red.png', // 빨간 마커 (public 폴더에 있어야 함)
+  shadowUrl: '/marker-shadow.png', // 그림자 이미지 (public 폴더 또는 외부 URL)
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  shadowSize: [41, 41],
+});
+
+// 파란 마커 아이콘 (추가)
+const blueIcon = new L.Icon({
+  iconUrl: '/marker-icon-blue.png', // 파란 마커 (public 폴더에 있어야 함)
+  shadowUrl: '/marker-shadow.png', // 그림자 이미지 동일
   iconSize: [25, 41],
   iconAnchor: [12, 41],
   popupAnchor: [1, -34],
@@ -86,6 +96,7 @@ function Location() {
             attribution="&copy; OpenStreetMap contributors"
           />
 
+          {/* 호텔 위치 마커 - 빨간 마커 */}
           <Marker position={hotelPosition} icon={hotelIcon}>
             <Popup>
               Continental Hotel 본점<br />
@@ -93,8 +104,9 @@ function Location() {
             </Popup>
           </Marker>
 
+          {/* 용의자 위치 마커 - 파란 마커 */}
           {fugitives.map((fugitive, index) => (
-            <Marker key={index} position={fugitive.position}>
+            <Marker key={index} position={fugitive.position} icon={blueIcon}>
               <Popup>
                 <strong>{fugitive.name}</strong><br />
                 현상금: {fugitive.bounty}<br />
