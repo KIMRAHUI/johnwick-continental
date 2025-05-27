@@ -55,6 +55,11 @@
   width: 100%;
   box-sizing: border-box;
 }
+/* 달력아이콘 흰색으로 반전 */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}
+
 
 .pay-btn {
   margin-top: 2rem;
@@ -72,7 +77,7 @@
   background-color: #c82333;
 }
 
-/* ✅ 모달 오버레이 */
+/*  모달 오버레이 */
 .payment-modal-overlay {
   position: fixed;
   top: 0;
@@ -88,7 +93,7 @@
   box-sizing: border-box;
 }
 
-/* ✅ 모달 내용 */
+/*  모달 내용 */
 .payment-modal {
   background-color: #1a1a1a;
   padding: 2rem;
