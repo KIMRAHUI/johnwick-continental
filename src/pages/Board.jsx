@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import './Board.css';
 
@@ -173,7 +172,9 @@ function Board() {
           <input type="text" placeholder="게시글 검색" value={searchText} onChange={(e) => setSearchText(e.target.value)} className="board-title-input" />
           <div className="sort-buttons">
             <button onClick={() => setSortNewestFirst((prev) => !prev)}>{sortNewestFirst ? '최신순' : '과거순'}</button>
-            <button onClick={toggleSortLikes}>{sortByLikes === 'likes' ? '좋아요순' : sortByLikes === 'dislikes' ? '싫어요순' : '기본정렬'}</button>
+            <button onClick={toggleSortLikes}>
+              {sortByLikes === 'likes' ? '좋아요순' : sortByLikes === 'dislikes' ? '싫어요순' : '기본정렬'}
+            </button>
           </div>
         </div>
 
@@ -190,8 +191,12 @@ function Board() {
                 <div className="reaction-buttons combined">
                   <button onClick={() => handleLike(post.id)}>👍 {post.likes}</button>
                   <button onClick={() => handleDislike(post.id)}>👎 {post.dislikes}</button>
-                  <button onClick={() => handleEdit(post)}>✏️ 수정</button>
-                  <button onClick={() => handleDelete(post.id)}>🗑 삭제</button>
+                  {post.author === author && (
+                    <>
+                      <button onClick={() => handleEdit(post)}>✏️ 수정</button>
+                      <button onClick={() => handleDelete(post.id)}>🗑 삭제</button>
+                    </>
+                  )}
                 </div>
               </div>
             </div>
