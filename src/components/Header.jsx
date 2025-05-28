@@ -24,20 +24,48 @@ function Header() {
 
         <nav className={`nav ${menuOpen ? 'active' : ''}`}>
           <div className="nav-links">
-            <Link to="/" onClick={closeMenu} className={location.pathname === '/' ? 'active' : ''}>
+            <Link
+              to="/"
+              onClick={closeMenu}
+              className={location.pathname === '/' ? 'active' : ''}
+            >
               Home
             </Link>
-            <Link to="/reservation" onClick={closeMenu} className={location.pathname === '/reservation' ? 'active' : ''}>
+            <Link
+              to="/reservation"
+              onClick={closeMenu}
+              className={location.pathname === '/reservation' ? 'active' : ''}
+            >
               Reservation
             </Link>
-            <Link to="/facilities" onClick={closeMenu} className={location.pathname.startsWith('/facilities') ? 'active' : ''}>
+            <Link
+              to="/facilities"
+              onClick={closeMenu}
+              className={location.pathname.startsWith('/facilities') ? 'active' : ''}
+            >
               Facilities
             </Link>
-            <Link to="/support" onClick={closeMenu} className={location.pathname === '/support' ? 'active' : ''}>
+            <Link
+              to="/support"
+              onClick={closeMenu}
+              className={location.pathname === '/support' ? 'active' : ''}
+            >
               Support
             </Link>
-            <Link to="/location" onClick={closeMenu} className={location.pathname === '/location' ? 'active' : ''}>
+            <Link
+              to="/location"
+              onClick={closeMenu}
+              className={location.pathname === '/location' ? 'active' : ''}
+            >
               Location
+            </Link>
+            
+            <Link
+              to="/board"
+              onClick={closeMenu}
+              className={location.pathname === '/board' ? 'active' : ''}
+            >
+              Board
             </Link>
           </div>
         </nav>

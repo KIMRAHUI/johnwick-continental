@@ -7,6 +7,8 @@ import Location from './pages/Location';
 import FacilityList from './pages/FacilityList';
 import FacilityDetail from './pages/FacilityDetail';
 import Payment from './pages/Payment'; 
+import Board from './pages/Board';
+
 
 function App() {
   return (
@@ -20,6 +22,7 @@ function App() {
         <Route path="/facilities" element={<FacilityList />} />
         <Route path="/facilities/:id" element={<FacilityDetail />} />
         <Route path="/payment" element={<Payment />} /> 
+        <Route path="/board" element={<Board />} />
       </Routes>
     </Router>
   );

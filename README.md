@@ -1,12 +1,79 @@
-# React + Vite
+# John Wick: Continental Hotel
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 프로젝트 개요
 
-Currently, two official plugins are available:
+본 프로젝트는 영화 '존 윅'의 세계관을 기반으로 한 가상의 호텔 서비스 웹사이트입니다. 컨티넨탈 호텔은 일반 숙박 기능 외에도, 킬러 전용 훈련장, 무기고, 비밀 회의실 등의 서비스를 제공합니다. 이 프로젝트는 세계관 몰입을 돕기 위해 어두운 테마와 세계관 설정을 반영한 UI/UX를 중심으로 구성되었습니다.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 핵심 기능
 
-## Expanding the ESLint configuration
+### 1. 호텔 시설 안내 및 예약 기능
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+* 메인 페이지에서 호텔의 주요 시설 소개 (스위트룸, 연회장, 무기고, 훈련실 등)
+* 각 시설 상세 페이지에서 기능 설명 및 이미지 제공
+* 예약 버튼 클릭 시 전용 예약 페이지로 이동
+
+### 2. 요원 전용 서비스 접근 제어
+
+* 무기고, 훈련실, 비밀 회의실은 요원 코드 입력 후 상세 페이지 접근 가능
+* 코드 인증 후에만 예약 기능 사용 가능 (코드 예시: `continental42`)
+
+### 3. 지도 기반 위치 안내
+
+* Leaflet과 OpenStreetMap 기반 지도 구현
+* 호텔 위치 및 수배중인 요원 위치를 지도에 마커로 시각화
+* 마커 클릭 시 요원 정보(이름, 현상금, 이유) 확인 가능
+
+### 4. 고객 지원/FAQ
+
+* 고객지원 전용 페이지에서 실시간 FAQ 필터링 가능
+* 문의 가능 시간, 연락 수단 등의 정보 카드로 제공
+
+### 5. 게시판 (CKEditor 기반)
+
+* CKEditor5 도입으로 이미지 업로드 포함한 리치 텍스트 작성 가능
+* 게시글 목록 확인, 검색, 정렬(최신순, 좋아요순, 싫어요순) 기능 포함
+* 게시글 좋아요/싫어요, 본인 작성글에 대한 수정/삭제 가능
+* 작성 시 요원 코드(`continental42`)를 통해 글쓰기 인증 진행
+* 업로드된 이미지는 왼쪽 정렬되며, 본문 텍스트는 모두 흰색으로 통일
+* 반응형 UI로 모바일에서도 자연스러운 레이아웃 제공
+
+## 기술 스택
+
+* **Frontend**: React + Vite
+* **Editor**: CKEditor5 (ClassicEditor 커스터마이징 + 이미지 업로드 지원)
+* **지도**: Leaflet + OpenStreetMap
+* **상태 관리**: useState 기반 로컬 상태 관리
+* **스타일링**: CSS 모듈 기반 커스텀 스타일링 (다크 테마)
+
+## 향후 개선 방향
+
+* Supabase 또는 외부 DB 연동 통한 실제 데이터 저장
+* 사용자 인증 시스템 도입 (회원가입/로그인)
+* 관리자 모드 추가로 게시글 및 예약 관리 기능 확장
+
+## 설치 및 실행
+
+```bash
+npm install
+npm run dev
+```
+
+## 주의사항
+
+* 요원 코드 없이 게시글 작성 불가
+* 현재는 로컬 상태 기반 더미 게시글로 운영 중
+
+## 라이선스
+
+본 프로젝트는 포트폴리오 목적으로 제작되었으며, 상업적 용도로 사용할 수 없습니다.
+
+---
+
+
+## 실행 방법
+
+1. 프로젝트 클론
+   ```bash
+   git clone https://github.com/KIMRAHUI/continental-board.git
+   cd continental-board
+
