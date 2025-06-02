@@ -17,7 +17,7 @@
   text-align: center;
 }
 
-/* 🔍 검색창 */
+/* 검색창 */
 .faq-search {
   width: 100%;
   max-width: 480px;
@@ -76,6 +76,22 @@
   line-height: 1.5;
 }
 
+.contact-form textarea {
+  width: 100%;
+  max-width: 480px; 
+  padding: 1rem;
+  border-radius: 8px;
+  background-color: #1a1a1a;
+  color: #eee;
+  border: 1px solid #444;
+  font-size: 1rem;
+  resize: vertical;
+  display: block;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+
 
 @media (max-width: 768px) {
   .support-page {
@@ -102,5 +118,10 @@
   .faq-search {
     font-size: 0.95rem;
     padding: 0.7rem 1rem;
+  }
+
+  .contact-form textarea {
+    padding: 0.8rem;
+    font-size: 0.95rem;
   }
 }
