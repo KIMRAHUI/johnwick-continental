@@ -56,7 +56,7 @@
   transition: background 0.3s ease;
   min-height: 70px;
   display: flex;
-  align-items: center;
+  align-items: flex-start; 
 }
 
 .faq-card:hover {
@@ -67,6 +67,7 @@
   font-size: 1.05rem;
   color: #fff;
   margin: 0;
+  line-height: 1.4;
 }
 
 /* 답변 아코디언 */
@@ -83,6 +84,7 @@
   max-height: 300px;
   opacity: 1;
   transform: translateY(0);
+  margin-top: 0.6rem; 
   padding: 0.7rem 1rem 1rem;
 }
 
@@ -151,12 +153,12 @@
   }
 
   .faq-card h3 {
-    font-size: 1rem;
+    font-size: 0.95rem;
   }
 
   .faq-answer-wrapper p,
   .contact-section p {
-    font-size: 0.95rem;
+    font-size: 0.9rem;
   }
 
   .faq-search {
