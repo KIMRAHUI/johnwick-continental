@@ -51,10 +51,10 @@ function Hero() {
       <section className="chart-section">
         <h2 className="chart-title">세계관 통계 정보</h2>
         <div className="chart-tabs">
-          <button onClick={() => setSelectedChart('room')}>🧨 객실 예약률</button>
-          <button onClick={() => setSelectedChart('facility')}>🎯 시설물 통계</button>
-          <button onClick={() => setSelectedChart('bounty')}>🔫 도시별 현상금</button>
-          <button onClick={() => setSelectedChart('guest')}>🩸 고객 유형</button>
+          <button onClick={() => setSelectedChart('room')}> 객실 예약률</button>
+          <button onClick={() => setSelectedChart('facility')}> 시설물 통계</button>
+          <button onClick={() => setSelectedChart('bounty')}> 도시별 현상금</button>
+          <button onClick={() => setSelectedChart('guest')}> 고객 유형</button>
         </div>
         <div className="chart-display">
           <div className="chart-wrapper">
