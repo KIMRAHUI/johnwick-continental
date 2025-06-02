@@ -1,0 +1,130 @@
+/* Step3UserInfo.css */
+
+.step3-user-info {
+  background-color: #0f0f0f;
+  color: #eee;
+  min-height: 100vh;
+  padding: 3rem 1.5rem;
+  font-family: 'Pretendard', sans-serif;
+}
+
+.step3-user-info h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 2rem;
+  color: #fff;
+}
+
+.user-info-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: #1a1a1a;
+  border-radius: 12px;
+}
+
+.user-info-form label {
+  display: flex;
+  flex-direction: column;
+  font-size: 1rem;
+  color: #fff;
+}
+
+.user-info-form input {
+  margin-top: 0.5rem;
+  padding: 0.7rem 1rem;
+  border-radius: 8px;
+  border: none;
+  background-color: #2b2b2b;
+  color: #fff;
+  font-size: 1rem;
+}
+
+.user-info-form .info-summary {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: stretch;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.info-summary p {
+  flex: 1 1 calc(25% - 0.5rem);
+  font-size: 0.9rem;
+  padding: 0.6rem;
+  border-radius: 8px;
+  color: #ccc;
+}
+
+.info-summary p.bg {
+  background-color: #2b2b2b;
+}
+
+.warning-text {
+  color: #f44336;
+  font-weight: bold;
+  text-align: center;
+  margin-top: -1rem;
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+}
+
+.form-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.next-button {
+  background-color: #b71c1c;
+  color: #fff;
+  padding: 0.8rem 2rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  min-width: 140px;
+}
+
+.next-button:hover {
+  background-color: #a31515;
+}
+
+@media (max-width: 768px) {
+  .user-info-form {
+    padding: 1.5rem;
+  }
+
+  .info-summary {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .info-summary p {
+    flex: 1 1 100%;
+  }
+
+  .form-buttons {
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .next-button {
+    width: 100%;
+    max-width: 300px;
+  }
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}

@@ -1,0 +1,37 @@
+.success-check {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* ← 수평 가운데 정렬 */
+  justify-content: center;
+  margin: 2rem 0;
+  animation: fadeIn 1s ease-in;
+}
+
+.coin-circle {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;           
+  justify-content: center; /* 수평 가운데 */
+  align-items: center;     /* 수직 가운데 */
+  animation: scaleBounce 0.5s ease;
+}
+
+
+
+.coin-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  animation: spinCoin 2s ease-in-out 1 forwards;
+}
+
+@keyframes spinCoin {
+  from {
+    transform: rotateY(0deg);
+  }
+  to {
+    transform: rotateY(1800deg); /* 5바퀴 */
+  }
+}

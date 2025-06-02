@@ -156,7 +156,7 @@ function Board() {
   return (
     <div className="board-page">
       <div className="board-container">
-        <h2>콘티넨탈 게시판</h2>
+        <h2>Continental Board</h2>
 
         <div className="post-form">
           <input type="text" placeholder="제목" value={title} onChange={(e) => setTitle(e.target.value)} className="board-title-input" />

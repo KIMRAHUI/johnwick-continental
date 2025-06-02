@@ -1,0 +1,84 @@
+.emergency-payment {
+  background-color: #0d0d0d;
+  color: #eee;
+  min-height: 100vh;
+  padding: 4rem 2rem;
+  font-family: 'Pretendard', sans-serif;
+  text-align: center;
+}
+
+h2 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+
+.info-box {
+  background-color: #1a1a1a;
+  padding: 1.5rem;
+  border-radius: 12px;
+  margin: 0 auto 2rem;
+  max-width: 480px;
+}
+
+.info-box p {
+  margin: 0.5rem 0;
+  font-size: 1.1rem;
+}
+
+.payment-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.payment-form label {
+  font-size: 1rem;
+  color: #ccc;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 360px;
+}
+
+.payment-form input {
+  width: 100%;
+  padding: 0.7rem;
+  margin-top: 0.3rem;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: 1px solid #aaa;
+  background-color: #1a1a1a;
+  color: white;
+}
+
+.pay-btn {
+  background-color: #e63946;
+  color: white;
+  padding: 0.8rem 1.6rem;
+  font-size: 1.05rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+
+.pay-btn:hover {
+  background-color: #c82333;
+}
+
+.success-box {
+  background-color: #1a1a1a;
+  padding: 2rem;
+  border-radius: 12px;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.notice-text {
+  margin-top: 2rem;
+  font-size: 0.95rem;
+  color: #f7c948;
+  line-height: 1.5;
+}

@@ -1,30 +1,27 @@
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import L from 'leaflet';
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import 'leaflet/dist/leaflet.css';
 import './Location.css';
 
-// 호텔 빨간 마커 아이콘
 const hotelIcon = new L.Icon({
-  iconUrl: '/marker-icon-red.png', // 빨간 마커 (public 폴더에 있어야 함)
-  shadowUrl: '/marker-shadow.png', // 그림자 이미지 (public 폴더 또는 외부 URL)
+  iconUrl: '/marker-icon-red.png',
+  shadowUrl: '/marker-shadow.png',
   iconSize: [25, 41],
   iconAnchor: [12, 41],
   popupAnchor: [1, -34],
   shadowSize: [41, 41],
 });
 
-// 파란 마커 아이콘 (추가)
 const blueIcon = new L.Icon({
-  iconUrl: '/marker-icon-blue.png', // 파란 마커 (public 폴더에 있어야 함)
-  shadowUrl: '/marker-shadow.png', // 그림자 이미지 동일
+  iconUrl: '/marker-icon-blue.png',
+  shadowUrl: '/marker-shadow.png',
   iconSize: [25, 41],
   iconAnchor: [12, 41],
   popupAnchor: [1, -34],
   shadowSize: [41, 41],
 });
 
-// 🔍 카카오 주소 검색 팝업 버튼
 function AddressSearch({ mapRef }) {
   const handleSearch = () => {
     new window.daum.Postcode({
@@ -55,26 +52,30 @@ function Location() {
   const hotelPosition = [37.5665, 126.9780];
   const mapRef = useRef();
 
-  const fugitives = [
-    {
-      name: 'Cassian',
-      bounty: '₩500,000,000',
-      reason: '콘티넨탈 내 무단 공격',
-      position: [37.5645, 126.9770],
-    },
-    {
-      name: 'Ares',
-      bounty: '₩350,000,000',
-      reason: '하이테이블 금고 침입',
-      position: [37.5678, 126.9825],
-    },
-    {
-      name: "Santino D'Antonio",
-      bounty: '₩800,000,000',
-      reason: '신성한 계약 위반',
-      position: [37.5655, 126.9760],
-    },
+  const initialFugitives = [
+    { name: 'Cassian', bounty: '₩500,000,000', reason: '콘티넨탈 내 무단 공격', position: [37.5645, 126.9770] },
+    { name: 'Ares', bounty: '₩350,000,000', reason: '하이테이블 금고 침입', position: [37.5678, 126.9825] },
+    { name: "Santino D'Antonio", bounty: '₩800,000,000', reason: '신성한 계약 위반', position: [37.5655, 126.9760] },
   ];
+
+  const [fugitives, setFugitives] = useState(initialFugitives);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setFugitives((prev) =>
+        prev.map((f) => {
+          const latOffset = (Math.random() - 0.5) * 0.0002;
+          const lngOffset = (Math.random() - 0.5) * 0.0002;
+          return {
+            ...f,
+            position: [f.position[0] + latOffset, f.position[1] + lngOffset],
+          };
+        })
+      );
+    }, 2000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <section className="location-page">
@@ -96,7 +97,6 @@ function Location() {
             attribution="&copy; OpenStreetMap contributors"
           />
 
-          {/* 호텔 위치 마커 - 빨간 마커 */}
           <Marker position={hotelPosition} icon={hotelIcon}>
             <Popup>
               Continental Hotel 본점<br />
@@ -104,7 +104,6 @@ function Location() {
             </Popup>
           </Marker>
 
-          {/* 용의자 위치 마커 - 파란 마커 */}
           {fugitives.map((fugitive, index) => (
             <Marker key={index} position={fugitive.position} icon={blueIcon}>
               <Popup>

@@ -17,13 +17,21 @@
   max-width: 960px;
 }
 
-.detail-image {
+
+.detail-image,
+.facility-detail-image {
   width: 100%;
+  max-width: 750px;
   height: auto;
+  max-height: 450px;
+  object-fit: cover;
   border-radius: 12px;
-  box-shadow: 0 0 12px rgba(255, 0, 0, 0.2);
-  margin-bottom: 2rem;
+  display: block;
+  margin: 0 auto;
 }
+
+
+
 
 /* ← 목록으로 버튼 (우측 상단 고정) */
 .back-top-btn {
@@ -75,6 +83,12 @@
   display: inline-block;
 }
 
+.reservation-info strong {
+  color: #f7c948;
+  font-size: 1.15rem;
+}
+
+
 .pay-btn {
   background-color: #e63946;
   color: white;
@@ -94,6 +108,11 @@
 @media (max-width: 768px) {
   .facility-detail {
     padding: 3rem 1rem;
+  }
+
+  .facility-detail-image {
+    max-height: 200px;
+   
   }
 
   .back-top-btn {

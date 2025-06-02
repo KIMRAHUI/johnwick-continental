@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import './Reservation.css';
 import RoomCard from '../components/RoomCard';
 import deluxe from '../assets/deluxe.png';
 import assassin from '../assets/assassin.png';
@@ -6,61 +7,82 @@ import blackroom from '../assets/blackroom.png';
 import bunker from '../assets/bunker.png';
 import penthouse from '../assets/penthouse.png';
 import silentRoom from '../assets/silent-room.png';
-import './Reservation.css';
 
 function Reservation() {
   const navigate = useNavigate();
 
-  // 결제 페이지로 이동하는 함수
-  const handleBook = (roomName) => {
-    navigate('/payment', { state: { selectedRoom: roomName } });
+  const roomList = [
+    {
+      title: '디럭스 스위트',
+      image: deluxe,
+      price: 15,
+      maxPeople: 2,
+      available: 3,
+      description: '방음 설계와 신분 세탁 통로 연결\n프라이빗 욕실과 더블 침대가 제공, 지상 3층에 위치',
+    },
+    {
+      title: '암살자 은신처',
+      image: assassin,
+      price: 20,
+      maxPeople: 2,
+      available: 2,
+      description: '은밀한 이동 경로,\n 프라이빗 보안 시스템,\n트윈 침대가 제공,\n 무기 보관이 가능한 2층 구조',
+    },
+    {
+      title: '블랙 룸',
+      image: blackroom,
+      price: 30,
+      maxPeople: 2,
+      available: 1,
+      description: '하이테이블 VIP 전용의 독립 공간\n킹사이즈 침대와 최고급 욕실',
+    },
+    {
+      title: '콘티넨탈 벙커',
+      image: bunker,
+      price: 25,
+      maxPeople: 4,
+      available: 2,
+      description: '지하 금고와 연결된 보안형 객실\n이층 침대 2세트가 제공,\n 외부와 완전히 격리된 구조',
+    },
+    {
+      title: '하이 테이블 펜트하우스',
+      image: penthouse,
+      price: 40,
+      maxPeople: 4,
+      available: 1,
+      description: '최상층에 위치하여 멋진 도시 전경\n슈퍼 킹사이즈 베드\n 전용 자쿠지가 완비',
+    },
+    {
+      title: '사일런트 쿼터스',
+      image: silentRoom,
+      price: 12,
+      maxPeople: 1,
+      available: 4,
+      description: '접촉이 금지된 격리형 방음 객실\n단독 침대가 제공\n 단기 대기용으로 최적화',
+    }
+  ];
+
+
+  const handleSelect = (room) => {
+    navigate('/reservation/step2', {
+      state: {
+        selectedRoom: room.title,
+        pricePerNight: room.price,
+        availableRooms: room.available,
+        maxPeople: room.maxPeople,
+      },
+    });
   };
 
   return (
     <section className="reservation-page">
+      <div className="reservation-header">
+        <h2>Room Reservation</h2>
+      </div>
       <div className="room-list">
-        <RoomCard
-          title="디럭스 스위트"
-          description={`음향 차단 공간\n신분 세탁 출구`}
-          price="₩300,000 / 1박"
-          image={deluxe}
-          onBook={() => handleBook('디럭스 스위트')}
-        />
-        <RoomCard
-          title="암살자 은신처"
-          description={`최대 프라이버시\n무기 보관함 접근 가능`}
-          price="₩500,000 / 1박"
-          image={assassin}
-          onBook={() => handleBook('암살자 은신처')}
-        />
-        <RoomCard
-          title="블랙 룸"
-          description={`VIP 전용\n전담 집사 서비스`}
-          price="₩1,000,000 / 문의 필요"
-          image={blackroom}
-          onBook={() => handleBook('블랙 룸')}
-        />
-        <RoomCard
-          title="콘티넨탈 벙커"
-          description={`지하 금고\n완전한 은폐 보장`}
-          price="₩800,000 / 1박"
-          image={bunker}
-          onBook={() => handleBook('콘티넨탈 벙커')}
-        />
-        <RoomCard
-          title="하이 테이블 펜트하우스"
-          description={`도시 전경 전망\n하이 테이블 멤버 전용`}
-          price="₩1,500,000 / 문의 필요"
-          image={penthouse}
-          onBook={() => handleBook('하이 테이블 펜트하우스')}
-        />
-        <RoomCard
-          title="사일런트 쿼터스"
-          description={`방음 보호소\n접촉 금지, 완전 격리`}
-          price="₩380,000 / 1박"
-          image={silentRoom}
-          onBook={() => handleBook('사일런트 쿼터스')}
-        />
+        {roomList.map((room) => (
+          <RoomCard key={room.title} room={room} onSelect={() => handleSelect(room)} />
+        ))}
       </div>
     </section>
   );

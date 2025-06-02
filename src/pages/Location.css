@@ -8,9 +8,9 @@
   min-height: 100vh;
 }
 
-/* 제목 + 버튼 한 줄 정렬 */
 .location-header {
   display: flex;
+  justify-content: center;
   align-items: center;
   gap: 1rem;
   max-width: 960px;
@@ -24,7 +24,7 @@
   margin: 0;
 }
 
-/* 버튼 전용 스타일 */
+
 .search-bar {
   display: flex;
 }
@@ -76,7 +76,7 @@
   font-size: 1.05rem;
 }
 
-/* 호텔 위치 설명 카드 */
+
 .location-info {
   max-width: 720px;
   margin: 0 auto;
@@ -102,7 +102,7 @@
 @media (max-width: 768px) {
   .location-header {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     gap: 0.5rem;
   }
 
