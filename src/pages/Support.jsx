@@ -22,6 +22,10 @@ const faqData = [
     question: '전용 차량 서비스가 제공되나요?',
     answer: '필요 시 고스트 운전기사와 차량이 대기 중이며, 추가 금화가 필요합니다.',
   },
+  {
+    question: '숙소 내 와이파이는 제공되나요?',
+    answer: '모든 객실과 공용 공간에 고속 암호화 와이파이가 제공됩니다.',
+  },
 ];
 
 function Support() {
@@ -42,7 +46,7 @@ function Support() {
 
       <input
         type="text"
-        placeholder="질문을 검색하세요..."
+        placeholder="문의 사항 검색"
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
         className="faq-search"
@@ -50,13 +54,16 @@ function Support() {
 
       <div className="faq-section">
         {filteredFaqs.map((faq, index) => (
-          <div
-            className={`faq-card ${openIndex === index ? 'open' : ''}`}
-            key={index}
-            onClick={() => handleToggle(index)}
-          >
-            <h3>{faq.question}</h3>
-            {openIndex === index && <p>{faq.answer}</p>}
+          <div key={index} className="faq-group">
+            <div
+              className={`faq-card ${openIndex === index ? 'open' : ''}`}
+              onClick={() => handleToggle(index)}
+            >
+              <h3>{faq.question}</h3>
+            </div>
+            <div className={`faq-answer-wrapper ${openIndex === index ? 'open' : ''}`}>
+              <p>{faq.answer}</p>
+            </div>
           </div>
         ))}
       </div>
