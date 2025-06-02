@@ -23,7 +23,7 @@
   max-width: 400px;
   padding: 0.8rem 1rem;
   margin: 0 auto 2rem;
-  border: 1px solid #ccc;
+  border: 1px solid #555;
   border-radius: 10px;
   font-size: 1rem;
   display: block;
@@ -39,7 +39,7 @@
   margin-bottom: 3rem;
 }
 
-/* 각 질문/답변 그룹 */
+/* 질문+답변 그룹 */
 .faq-group {
   width: 100%;
   max-width: 350px;
@@ -48,12 +48,15 @@
 /* 질문 카드 */
 .faq-card {
   background-color: #1a1a1a;
-  padding: 1.2rem 1.4rem;
+  padding: 0.8rem 1rem;
   border-left: 4px solid #e63946;
   border-radius: 10px;
-  box-shadow: 0 0 10px rgba(230, 57, 70, 0.2);
+  box-shadow: 0 0 10px rgba(230, 57, 70, 0.15);
   cursor: pointer;
   transition: background 0.3s ease;
+  min-height: 70px;
+  display: flex;
+  align-items: center;
 }
 
 .faq-card:hover {
@@ -72,32 +75,27 @@
   overflow: hidden;
   opacity: 0;
   transform: translateY(-6px);
-  transition:
-    max-height 0.4s ease,
-    opacity 0.3s ease,
-    transform 0.3s ease;
+  transition: max-height 0.4s ease, opacity 0.3s ease, transform 0.3s ease;
   padding: 0;
-  margin-top: 0;
 }
 
 .faq-answer-wrapper.open {
   max-height: 300px;
   opacity: 1;
   transform: translateY(0);
-  margin-top: 0.5rem;
-  padding: 0.8rem 1rem;
+  padding: 0.7rem 1rem 1rem;
 }
 
 .faq-answer-wrapper p {
-  background-color: #1c1c1c;
+  background-color: #181818;
   border-left: 3px solid #e63946;
   padding: 0.8rem 1rem;
   margin: 0;
   border-radius: 6px;
   color: #ccc;
-  font-size: 0.96rem;
+  font-size: 0.95rem;
   line-height: 1.6;
-  box-shadow: inset 0 0 4px rgba(255, 0, 0, 0.15);
+  box-shadow: inset 0 0 5px rgba(255, 0, 0, 0.08);
 }
 
 /* 문의 안내 */
@@ -112,7 +110,7 @@
   line-height: 1.5;
 }
 
-/* 문의 내용 입력창 */
+/* 문의 입력창 */
 .contact-form textarea {
   width: 100%;
   max-width: 480px;
@@ -144,11 +142,12 @@
   }
 
   .faq-group {
-    max-width: 250px;
+    max-width: 260px;
   }
 
   .faq-card {
-    padding: 1.2rem;
+    min-height: 80px;
+    padding: 0.7rem 1rem;
   }
 
   .faq-card h3 {
@@ -161,12 +160,11 @@
   }
 
   .faq-search {
-  max-width: 300px;
-  font-size: 0.95rem;
-  padding: 0.6rem 0.9rem;
-  margin: 0 auto 1.5rem;
-}
-
+    max-width: 300px;
+    font-size: 0.95rem;
+    padding: 0.6rem 0.9rem;
+    margin: 0 auto 1.5rem;
+  }
 
   .contact-form textarea {
     max-width: 90vw;
