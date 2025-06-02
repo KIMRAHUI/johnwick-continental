@@ -1,31 +1,40 @@
 <!doctype html>
-<html lang="en">
+<html lang="ko">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>The Continental</title>
+    <title>The Continental - 존 윅의 세계로</title>
 
-    <!-- Open Graph meta tags -->
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/favicon.png" />
+
+    <!-- Open Graph -->
     <meta property="og:title" content="The Continental - Official Site" />
     <meta property="og:description" content="Experience the world of John Wick's Continental Hotel." />
     <meta property="og:image" content="https://johnwick-continental-eq5j.vercel.app/C.png" />
+    <meta property="og:url" content="https://johnwick-continental-eq5j.vercel.app/" />
     <meta property="og:type" content="website" />
 
-    <!-- Twitter Card meta tags -->
+    <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="The Continental - Official Site" />
     <meta name="twitter:description" content="Experience the world of John Wick's Continental Hotel." />
     <meta name="twitter:image" content="https://johnwick-continental-eq5j.vercel.app/C.png" />
+
+    <!-- Pretendard Font (optional but consistent with style) -->
+    <link href="https://fonts.googleapis.com/css2?family=Pretendard&display=swap" rel="stylesheet" />
+
+    <!-- Global Stylesheet (optional, if needed globally) -->
+    <!-- <link rel="stylesheet" href="/styles/global.css" /> -->
   </head>
+
   <body>
     <div id="root"></div>
 
-    <!-- Vite React Entry -->
-    <script type="module" src="./src/main.jsx"></script>
+    <!-- Vite Entry Point -->
+    <script type="module" src="/src/main.jsx"></script>
 
     <!-- Kakao 주소 검색 API -->
     <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-
   </body>
 </html>

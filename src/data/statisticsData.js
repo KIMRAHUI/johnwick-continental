@@ -1,3 +1,16 @@
+
+const darkWickColors = {
+  red: '#e63946',
+  deepRed: '#6a040f',
+  darkGray: '#1a1a1a',
+  gray: '#444',
+  navy: '#003049',
+  olive: '#283618',
+  wine: '#7b2d26',
+  slate: '#2b2d42',
+  silver: '#8d99ae',
+};
+
 // 객실별 예약률 - Bar 그래프용
 export const roomBookingData = {
   labels: ['디럭스룸', '스위트룸', '킬러스위트룸', '비밀오피스'],
@@ -5,7 +18,12 @@ export const roomBookingData = {
     {
       label: '예약 수',
       data: [40, 25, 15, 20],
-      backgroundColor: ['#dc2626', '#2563eb', '#facc15', '#10b981'],
+      backgroundColor: [
+        darkWickColors.red,
+        darkWickColors.wine,
+        darkWickColors.deepRed,
+        darkWickColors.olive,
+      ],
     },
   ],
 };
@@ -17,7 +35,12 @@ export const facilityUsageData = {
     {
       label: '이용 비율',
       data: [35, 30, 20, 15],
-      backgroundColor: ['#ef4444', '#3b82f6', '#8b5cf6', '#f97316'],
+      backgroundColor: [
+        darkWickColors.deepRed,
+        darkWickColors.navy,
+        darkWickColors.red,
+        darkWickColors.gray,
+      ],
     },
   ],
 };
@@ -29,7 +52,12 @@ export const bountyByCityData = {
     {
       label: '현상금 지명 수',
       data: [50, 30, 40, 20],
-      backgroundColor: ['#f87171', '#60a5fa', '#a78bfa', '#34d399'],
+      backgroundColor: [
+        darkWickColors.red,
+        darkWickColors.slate,
+        darkWickColors.deepRed,
+        darkWickColors.silver,
+      ],
     },
   ],
 };
@@ -41,7 +69,11 @@ export const guestTypeData = {
     {
       label: '고객 비율',
       data: [60, 25, 15],
-      backgroundColor: ['#991b1b', '#1e40af', '#065f46'],
+      backgroundColor: [
+        darkWickColors.red,
+        darkWickColors.olive,
+        darkWickColors.navy,
+      ],
     },
   ],
 };

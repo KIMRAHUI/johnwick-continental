@@ -1,4 +1,4 @@
-/* 전체 게시판 페이지 스타일 */
+
 .board-page {
   background-color: #0d0d0d;
   color: #eee;
@@ -18,8 +18,9 @@
 .board-page h2 {
   font-size: 2rem;
   margin-bottom: 2rem;
-  border-bottom: 2px solid #900;
+  border-bottom: 2px solid #b30000;
   padding-bottom: 0.5rem;
+  color: #fff;
 }
 
 .post-form {
@@ -27,7 +28,7 @@
   padding: 1.5rem;
   border-radius: 12px;
   margin-bottom: 2rem;
-  box-shadow: 0 0 12px rgba(255, 0, 0, 0.1);
+  box-shadow: 0 0 12px rgba(255, 0, 0, 0.2);
   overflow: hidden;
 }
 
@@ -120,7 +121,7 @@
   background-color: #1a1a1a;
   padding: 1.5rem;
   border-radius: 12px;
-  box-shadow: 0 0 10px rgba(255, 0, 0, 0.05);
+  box-shadow: 0 0 10px rgba(255, 0, 0, 0.08);
 }
 
 .post-card h3 {
@@ -148,8 +149,6 @@
   clear: both;
 }
 
-
-
 .post-content img {
   display: block;
   margin: 1rem auto;
@@ -157,7 +156,7 @@
   max-height: 240px;
   border-radius: 12px;
   object-fit: cover;
-  box-shadow: 0 0 8px rgba(255, 255, 255, 0.05);
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.08);
   border: 1px solid #333;
   padding: 4px;
   background-color: #111;
@@ -209,8 +208,6 @@
   box-sizing: border-box;
 }
 
-
-
 .ck-editor__editable_inline {
   border: 1px solid #ccc;
 }
@@ -221,7 +218,6 @@
   margin-top: 1rem;
 }
 
-
 .editor-wrapper > div {
   min-height: 250px;
   border: 1px solid #333;
@@ -231,10 +227,6 @@
   color: white;
   box-sizing: border-box;
 }
-
-
-
-
 
 @media (max-width: 480px) {
   .post-content img {

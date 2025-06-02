@@ -51,6 +51,7 @@
   font-weight: bold;
   cursor: pointer;
   transition: 0.3s;
+  border-radius: 8px;
 }
 
 .hero-link:hover {
@@ -58,7 +59,20 @@
   color: white;
 }
 
-/* 그래프 섹션 */
+/*버튼을 좌우 정렬 */
+.hero-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 1.5rem;
+}
+
+.hero-buttons .hero-link {
+  flex-shrink: 0;
+}
+
+/*그래프 섹션 */
 .chart-section {
   background-color: #0d0d0d;
   color: white;
@@ -75,7 +89,7 @@
 
 .chart-tabs {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
   gap: 0.75rem;
   justify-content: center;
   max-width: 720px;
@@ -118,8 +132,7 @@
   height: 100%;
 }
 
-
-/* 소개 카드 */
+/*소개 카드 */
 .glass-card-wrapper {
   background-color: #000;
   padding: 5rem 1.5rem 4rem;
@@ -183,6 +196,13 @@
     padding: 0.6rem 1.2rem;
   }
 
+  .hero-buttons {
+    flex-direction: row;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
   .glass-card {
     padding: 1.6rem 1.2rem;
   }
@@ -200,12 +220,17 @@
     font-size: 1.4rem;
   }
 
+  .chart-tabs {
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  }
+
   .chart-tabs button {
     font-size: 0.9rem;
-    padding: 0.5rem 0.9rem;
+    padding: 0.5rem 0.8rem;
   }
 
   .chart-display {
     padding: 1rem;
+    height: 320px;
   }
 }

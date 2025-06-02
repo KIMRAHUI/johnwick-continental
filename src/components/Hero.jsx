@@ -2,9 +2,7 @@ import './Hero.css';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import {
-  Bar,
-  Doughnut,
-  Pie,
+  Bar, Doughnut, Pie
 } from 'react-chartjs-2';
 import {
   Chart as ChartJS,
@@ -28,6 +26,7 @@ ChartJS.register(CategoryScale, LinearScale, BarElement, ArcElement, Tooltip, Le
 function Hero() {
   const navigate = useNavigate();
   const [selectedChart, setSelectedChart] = useState('room');
+  const [showCharts, setShowCharts] = useState(false);
 
   const commonOptions = {
     responsive: true,
@@ -36,37 +35,44 @@ function Hero() {
 
   return (
     <>
-      {/* 상단 히어로 배경 영역 */}
+      {/* 히어로 배경 */}
       <section className="hero">
         <div className="hero-content">
           <h1>The Continental</h1>
           <p>오직 금화로만 입장 가능한 킬러들의 마지막 안식처</p>
-          <button className="hero-link" onClick={() => navigate('/reservation/step1')}>
-            예약하기
-          </button>
-        </div>
-      </section>
-
-      {/* 세계관 통계 그래프 섹션 */}
-      <section className="chart-section">
-        <h2 className="chart-title">세계관 통계 정보</h2>
-        <div className="chart-tabs">
-          <button onClick={() => setSelectedChart('room')}> 객실 <br />예약률</button>
-          <button onClick={() => setSelectedChart('facility')}> 시설물<br /> 통계</button>
-          <button onClick={() => setSelectedChart('bounty')}> 도시별<br /> 현상금</button>
-          <button onClick={() => setSelectedChart('guest')}> 고객 유형</button>
-        </div>
-        <div className="chart-display">
-          <div className="chart-wrapper">
-            {selectedChart === 'room' && <Bar data={roomBookingData} options={commonOptions} />}
-            {selectedChart === 'facility' && <Doughnut data={facilityUsageData} options={commonOptions} />}
-            {selectedChart === 'bounty' && <Doughnut data={bountyByCityData} options={commonOptions} />}
-            {selectedChart === 'guest' && <Pie data={guestTypeData} options={commonOptions} />}
+          <div className="hero-buttons">
+            <button className="hero-link" onClick={() => navigate('/reservation/step1')}>
+              예약하기
+            </button>
+            <button className="hero-link" onClick={() => setShowCharts(!showCharts)}>
+              {showCharts ? '세계관 통계 닫기' : '세계관 통계 보기'}
+            </button>
           </div>
         </div>
       </section>
 
-      {/* 소개 카드 영역 */}
+      {/* 통계 섹션 */}
+      {showCharts && (
+        <section className="chart-section">
+          <h2 className="chart-title">세계관 통계 정보</h2>
+          <div className="chart-tabs">
+            <button onClick={() => setSelectedChart('room')}> 객실<br />예약률</button>
+            <button onClick={() => setSelectedChart('facility')}> 시설물<br />통계</button>
+            <button onClick={() => setSelectedChart('bounty')}> 도시별<br />현상금</button>
+            <button onClick={() => setSelectedChart('guest')}> 고객<br />유형</button>
+          </div>
+          <div className="chart-display">
+            <div className="chart-wrapper">
+              {selectedChart === 'room' && <Bar data={roomBookingData} options={commonOptions} />}
+              {selectedChart === 'facility' && <Doughnut data={facilityUsageData} options={commonOptions} />}
+              {selectedChart === 'bounty' && <Doughnut data={bountyByCityData} options={commonOptions} />}
+              {selectedChart === 'guest' && <Pie data={guestTypeData} options={commonOptions} />}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* 소개 카드 */}
       <section className="glass-card-wrapper">
         <div className="glass-card">
           <div className="glass-section">
