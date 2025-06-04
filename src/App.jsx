@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
+import Footer from './components/Footer'; 
 import Hero from './components/Hero';
 import Support from './pages/Support';
 import Location from './pages/Location';
@@ -31,6 +32,7 @@ function App() {
         <Route path="/emergency-payment" element={<EmergencyPayment />} />
         <Route path="/board" element={<Board />} />
       </Routes>
+      <Footer /> {/*Footer 항상 아래에 렌더링 */}
     </Router>
   );
 }
