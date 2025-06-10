@@ -1,28 +1,33 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import './Board.css';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import MyUploadAdapterPlugin from './MyUploadAdapterPlugin'; // ✅ 이미지 업로드 어댑터 등록
+import MyUploadAdapterPlugin from './MyUploadAdapterPlugin';
 import CommentSection from '../components/CommentSection';
 
 const API_BASE = import.meta.env.VITE_API_URL || '';
 
 function Board() {
-  const [posts, setPosts] = useState([]);
-  const [title, setTitle] = useState('');
-  const [content, setContent] = useState('');
-  const [author, setAuthor] = useState('');
-  const [code, setCode] = useState('');
-  const [editingId, setEditingId] = useState(null);
-  const [searchText, setSearchText] = useState('');
-  const [sortNewestFirst, setSortNewestFirst] = useState(true);
-  const [sortByLikes, setSortByLikes] = useState(null);
-  const [showCommentsFor, setShowCommentsFor] = useState(null); // ✅ 댓글 토글 상태
-  const [currentUserAuthor, setCurrentUserAuthor] = useState(''); // ✅ 현재 사용자 저장 (author 기준)
-  const [currentUserCode, setCurrentUserCode] = useState(''); // ✅ 현재 사용자 코드 저장
-  const [likedPosts, setLikedPosts] = useState(new Set()); // ✅ 좋아요 누른 게시글 ID 집합
-  const [dislikedPosts, setDislikedPosts] = useState(new Set()); // ✅ 싫어요 누른 게시글 ID 집합
+  const editorRef = useRef(null); // ✅ 상단 에디터 영역 참조용 ref
+
+  // ✅ 상태 변수 정의
+  const [posts, setPosts] = useState([]); // 전체 게시글 목록
+  const [title, setTitle] = useState(''); // 입력: 제목
+  const [content, setContent] = useState(''); // 입력: 내용
+  const [author, setAuthor] = useState(''); // 입력: 작성자
+  const [code, setCode] = useState(''); // 입력: 비밀번호 (access code)
+  const [editingId, setEditingId] = useState(null); // 수정 중인 게시글 ID
+
+  const [searchText, setSearchText] = useState(''); // 검색어
+  const [sortNewestFirst, setSortNewestFirst] = useState(true); // 최신순 / 과거순
+  const [sortByLikes, setSortByLikes] = useState(null); // 좋아요/싫어요 정렬
+  const [showCommentsFor, setShowCommentsFor] = useState(null); // 댓글 토글 상태
+
+  const [currentUserAuthor, setCurrentUserAuthor] = useState(''); // 로그인된 사용자 이름
+  const [currentUserCode, setCurrentUserCode] = useState(''); // 로그인된 사용자 코드
+  const [likedPosts, setLikedPosts] = useState(new Set()); // 좋아요 누른 게시글
+  const [dislikedPosts, setDislikedPosts] = useState(new Set()); // 싫어요 누른 게시글
 
   // ✅ 게시글 불러오기
   const fetchPosts = async () => {
@@ -40,7 +45,7 @@ function Board() {
     }
   };
 
-  // 최초 렌더링 시 localStorage에서 현재 사용자 정보 복원
+  // ✅ 컴포넌트 초기 마운트 시 localStorage 복원 및 게시글 불러오기
   useEffect(() => {
     const savedAuthor = localStorage.getItem('currentUserAuthor') || '';
     const savedCode = localStorage.getItem('currentUserCode') || '';
@@ -57,6 +62,7 @@ function Board() {
 
     try {
       if (editingId) {
+        // 수정인 경우
         await axios.put(`${API_BASE}/api/posts/${editingId}`, {
           title,
           content,
@@ -65,6 +71,7 @@ function Board() {
         });
         setEditingId(null);
       } else {
+        // 새 게시글 작성
         await axios.post(`${API_BASE}/api/posts`, {
           title,
           content,
@@ -72,7 +79,8 @@ function Board() {
           access_code: code,
         });
       }
-      // 작성 완료 후 현재 사용자 정보 localStorage에 저장
+
+      // localStorage 및 상태값 초기화
       localStorage.setItem('currentUserAuthor', author);
       localStorage.setItem('currentUserCode', code);
       setCurrentUserAuthor(author);
@@ -82,36 +90,42 @@ function Board() {
       setContent('');
       setAuthor('');
       setCode('');
-      fetchPosts();
+      fetchPosts(); // 목록 갱신
     } catch (err) {
       alert('❌ 게시글 처리 중 오류가 발생했습니다.');
     }
   };
 
-  // ✅ 게시글 수정 모드 진입
+  // ✅ 게시글 수정 진입
   const handleEdit = (post) => {
     const inputCode = prompt('수정하려면 요원 코드를 입력하세요.');
     if (inputCode === post.access_code) {
+      // 수정 모드 전환
       setTitle(post.title);
       setContent(post.content);
       setAuthor(post.author);
       setCode(inputCode);
       setEditingId(post.id);
-      // 현재 사용자 정보도 업데이트 (선택 사항)
+
+      // 사용자 정보 저장
       localStorage.setItem('currentUserAuthor', post.author);
       localStorage.setItem('currentUserCode', inputCode);
       setCurrentUserAuthor(post.author);
       setCurrentUserCode(inputCode);
+
+      // ✅ 상단 에디터로 자동 스크롤
+      setTimeout(() => {
+        editorRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 100);
     } else {
       alert('❌ 코드가 일치하지 않습니다.');
     }
   };
 
-  // ✅ 게시글 삭제
+  // ✅ 게시글 삭제 처리
   const handleDelete = async (post) => {
     const inputCode = prompt('삭제하려면 요원 코드를 입력하세요.');
     if (inputCode !== post.access_code) return alert('❌ 코드가 일치하지 않습니다.');
-
     if (!window.confirm('정말 삭제하시겠습니까?')) return;
 
     try {
@@ -124,7 +138,7 @@ function Board() {
     }
   };
 
-  // ✅ 좋아요 토글 처리 (한번 누르면 좋아요, 다시 누르면 좋아요 취소)
+  // ✅ 좋아요 버튼 토글
   const handleLike = async (postId) => {
     try {
       const post = posts.find((p) => p.id === postId);
@@ -133,8 +147,8 @@ function Board() {
       const hasLiked = likedPosts.has(postId);
       const hasDisliked = dislikedPosts.has(postId);
 
-      // 좋아요 취소
       if (hasLiked) {
+        // 좋아요 취소
         await axios.patch(`${API_BASE}/api/posts/${postId}/reactions`, {
           likes: post.likes - 1,
           dislikes: post.dislikes,
@@ -145,7 +159,7 @@ function Board() {
           return newSet;
         });
       } else {
-        // 좋아요 누르기 전에 싫어요 눌렀으면 싫어요 취소
+        // 싫어요 취소
         if (hasDisliked) {
           await axios.patch(`${API_BASE}/api/posts/${postId}/reactions`, {
             likes: post.likes,
@@ -157,7 +171,7 @@ function Board() {
             return newSet;
           });
         }
-        // 좋아요 +1
+        // 좋아요 추가
         await axios.patch(`${API_BASE}/api/posts/${postId}/reactions`, {
           likes: post.likes + 1,
           dislikes: post.dislikes,
@@ -170,7 +184,7 @@ function Board() {
     }
   };
 
-  // ✅ 싫어요 토글 처리 (한번 누르면 싫어요, 다시 누르면 취소)
+  // ✅ 싫어요 버튼 토글
   const handleDislike = async (postId) => {
     try {
       const post = posts.find((p) => p.id === postId);
@@ -179,7 +193,6 @@ function Board() {
       const hasLiked = likedPosts.has(postId);
       const hasDisliked = dislikedPosts.has(postId);
 
-      // 싫어요 취소
       if (hasDisliked) {
         await axios.patch(`${API_BASE}/api/posts/${postId}/reactions`, {
           likes: post.likes,
@@ -191,7 +204,6 @@ function Board() {
           return newSet;
         });
       } else {
-        // 싫어요 누르기 전에 좋아요 눌렀으면 좋아요 취소
         if (hasLiked) {
           await axios.patch(`${API_BASE}/api/posts/${postId}/reactions`, {
             likes: post.likes - 1,
@@ -203,7 +215,6 @@ function Board() {
             return newSet;
           });
         }
-        // 싫어요 +1
         await axios.patch(`${API_BASE}/api/posts/${postId}/reactions`, {
           likes: post.likes,
           dislikes: post.dislikes + 1,
@@ -228,7 +239,7 @@ function Board() {
     setShowCommentsFor((prev) => (prev === postId ? null : postId));
   };
 
-  // ✅ 검색 및 정렬 필터
+  // ✅ 게시글 검색 + 정렬 적용
   const filteredPosts = Array.isArray(posts)
     ? posts
         .filter(
@@ -250,8 +261,8 @@ function Board() {
       <div className="board-container">
         <h2>Continental Board</h2>
 
-        {/* 게시글 작성 폼 */}
-        <div className="post-form">
+        {/* ✅ 상단 작성/수정 영역 (스크롤 이동 대상) */}
+        <div className="post-form" ref={editorRef}>
           <input
             type="text"
             placeholder="제목"
@@ -261,9 +272,7 @@ function Board() {
           />
           <CKEditor
             editor={ClassicEditor}
-            config={{
-              extraPlugins: [MyUploadAdapterPlugin], // 이미지 업로드 어댑터 등록
-            }}
+            config={{ extraPlugins: [MyUploadAdapterPlugin] }}
             data={content}
             onChange={(event, editor) => setContent(editor.getData())}
           />
@@ -284,7 +293,7 @@ function Board() {
           <button onClick={handleSubmit}>{editingId ? '수정 완료' : '작성 완료'}</button>
         </div>
 
-        {/* 정렬 및 검색 */}
+        {/* ✅ 검색 및 정렬 컨트롤 */}
         <div className="board-controls">
           <input
             type="text"
@@ -309,24 +318,24 @@ function Board() {
 
         <p className="post-count">총 게시글: {filteredPosts.length}개</p>
 
-        {/* 게시글 목록 */}
+        {/* ✅ 게시글 카드 목록 */}
         <div className="post-list">
           {filteredPosts.map((post) => (
             <div key={post.id} className="post-card">
               <h3>{post.title}</h3>
               <p className="meta">
-                작성자: {post.author} | 작성일:{' '}
-                {new Date(post.created_at).toLocaleDateString()}
+                작성자: {post.author} | 작성일: {new Date(post.created_at).toLocaleDateString()}
               </p>
               <div className="post-content">
                 <div dangerouslySetInnerHTML={{ __html: post.content }}></div>
-
-                {/* 반응 버튼 + 내가 쓴 글만 수정/삭제 버튼 렌더링 + 댓글 보기 버튼 */}
                 <div className="reaction-buttons combined">
                   <button onClick={() => handleLike(post.id)} className={likedPosts.has(post.id) ? 'active-like' : ''}>
                     👍 {post.likes}
                   </button>
-                  <button onClick={() => handleDislike(post.id)} className={dislikedPosts.has(post.id) ? 'active-dislike' : ''}>
+                  <button
+                    onClick={() => handleDislike(post.id)}
+                    className={dislikedPosts.has(post.id) ? 'active-dislike' : ''}
+                  >
                     👎 {post.dislikes}
                   </button>
                   {post.author === currentUserAuthor && (
@@ -339,8 +348,6 @@ function Board() {
                     {showCommentsFor === post.id ? '댓글 숨기기' : '댓글 보기'}
                   </button>
                 </div>
-
-                {/* 댓글 표시 조건부 렌더링 */}
                 {showCommentsFor === post.id && <CommentSection postId={post.id} />}
               </div>
             </div>
