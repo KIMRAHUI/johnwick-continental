@@ -11,7 +11,7 @@
 - Chart: Chart.js + react-chartjs-2
 - 지도 라이브러리: Leaflet + OpenStreetMap
 - 스타일링: CSS 모듈화
-- 애니메이션: Framer Motion, 사용자 정의 모달
+- 애니메이션: css기반 사용자 정의 모달
 - 기타: localStorage 활용, 다단계 예약 상태 전달
 
 ---
