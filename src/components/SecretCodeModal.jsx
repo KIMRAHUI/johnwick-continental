@@ -22,7 +22,7 @@ function SecretCodeModal({ onClose, onSuccess }) {
         <p>이 시설은 요원 전용입니다. 접속 코드를 입력하세요.</p>
         <input
           type="password"
-          placeholder="접속 코드"
+          placeholder="continental42 (더미 pw)"
           value={code}
           onChange={(e) => setCode(e.target.value)}
         />
